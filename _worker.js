@@ -488,9 +488,12 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 						webSocket.send(await new Blob([vlessHeader, chunk]).arrayBuffer());
 						vlessHeader = null;
 					} else {
-						// console.log(`remoteSocketToWS send chunk ${chunk.byteLength}`);
+						 console.log(`remoteSocketToWS send chunk ${chunk.byteLength}`);
 						// seems no need rate limit this, CF seems fix this??..
-						
+						 if (remoteChunkCount > 20000) {
+						// cf one package is 4096 byte(4kb),  4096 * 20000 = 80M
+						await delay(1);
+						 }
 						webSocket.send(chunk);
 					}
 				},
