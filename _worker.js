@@ -492,8 +492,7 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 						// seems no need rate limit this, CF seems fix this??..
 						 if (remoteChunkCount > 20000) {
 						// cf one package is 4096 byte(4kb),  4096 * 20000 = 80M
-						  console.log(`DELAY`)
-						 // await delay(1);
+						  await delay(5);
 						 }
 						webSocket.send(chunk);
 					}
@@ -522,6 +521,10 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 		log(`retry`)
 		retry();
 	}
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /**
