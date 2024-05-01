@@ -493,7 +493,7 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 						 if (remoteChunkCount > 20000) {
 						// cf one package is 4096 byte(4kb),  4096 * 20000 = 80M
 						  console.log(`DELAY`)
-						  await delay(1);
+						 // await delay(1);
 						 }
 						webSocket.send(chunk);
 					}
