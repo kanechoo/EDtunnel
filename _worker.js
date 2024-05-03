@@ -477,7 +477,6 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 				 * @param {*} controller 
 				 */
 				async write(chunk, controller) {
-					await delay(1);
 					hasIncomingData = true;
 					remoteChunkCount++;
 					if (webSocket.readyState !== WS_READY_STATE_OPEN) {
