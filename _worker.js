@@ -469,7 +469,7 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 		.pipeTo(
 			new WritableStream({
 				start() {
-					await delay(1);
+					delay(1);
 				},
 				/**
 				 * 
