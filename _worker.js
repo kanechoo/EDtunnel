@@ -462,6 +462,7 @@ function processVlessHeader(vlessBuffer, userID) {
 async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, retry, log) {
 	// remote--> ws
 	let remoteChunkCount = 0;
+	let chunks = [];
 	/** @type {ArrayBuffer | null} */
 	let vlessHeader = vlessResponseHeader;
 	let hasIncomingData = false; // check if remoteSocket has incoming data
@@ -469,7 +470,6 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 		.pipeTo(
 			new WritableStream({
 				start() {
-					
 				},
 				/**
 				 * 
@@ -492,7 +492,7 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 						// seems no need rate limit this, CF seems fix this??..
 						if (remoteChunkCount > 20000) {
 						// cf one package is 4096 byte(4kb),  4096 * 20000 = 80M
-						  await delay(1);
+						 await delay(1);
 						}
 						webSocket.send(chunk);
 					}
